@@ -655,7 +655,11 @@ public class CalendarEvents extends ReactContextBaseJavaModule {
         calendar.putString("id", cursor.getString(0));
         calendar.putString("title", cursor.getString(1));
         calendar.putString("source", cursor.getString(2));
-        calendar.putBoolean("isPrimary", cursor.getString(3).equals("1"));
+        if (cursor.getString(3) != null) {            
+            calendar.putBoolean("isPrimary", cursor.getString(3).equals("1"));
+        } else {
+            calendar.putBoolean("isPrimary", false);            
+        }
         calendar.putArray("allowedAvailabilities", calendarAllowedAvailabilitiesFromDBString(cursor.getString(5)));
 
         int accesslevel = cursor.getInt(4);
